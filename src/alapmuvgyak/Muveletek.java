@@ -1,12 +1,14 @@
 package alapmuvgyak;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Muveletek extends javax.swing.JFrame {
 
@@ -210,6 +212,11 @@ public class Muveletek extends javax.swing.JFrame {
         mnuFajl.add(mnuFajlMent);
 
         mnuFajlMentMaskent.setText("Mentés másként...");
+        mnuFajlMentMaskent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFajlMentMaskentActionPerformed(evt);
+            }
+        });
         mnuFajl.add(mnuFajlMentMaskent);
         mnuFajl.add(jSeparator1);
 
@@ -280,7 +287,6 @@ public class Muveletek extends javax.swing.JFrame {
         fc.setDialogTitle("Fájl mentése:");
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File("."));
-        
         int valaszottGombErteke = fc.showSaveDialog(this);
         if (valaszottGombErteke == JFileChooser.APPROVE_OPTION){
             File f = fc.getSelectedFile();
@@ -294,6 +300,34 @@ public class Muveletek extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_mnuFajlMentActionPerformed
+
+    private void mnuFajlMentMaskentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFajlMentMaskentActionPerformed
+        JFileChooser fc = new JFileChooser(new File("."));
+        fc.setDialogTitle("Mentés másként:");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("PNG és GIF képek", "png", "gif");
+        fc.addChoosableFileFilter(imgFilter);
+        FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("csak szöveg (.txt)", "txt");
+        fc.addChoosableFileFilter(txtFilter);
+        FileNameExtensionFilter cspFilter = new FileNameExtensionFilter("saját(.csp)", "csp");
+        fc.addChoosableFileFilter(cspFilter);
+        
+        fc.setFileFilter(txtFilter);
+        
+        int valaszottGombErteke = fc.showSaveDialog(this);
+        if (valaszottGombErteke == JFileChooser.APPROVE_OPTION){
+            File f = fc.getSelectedFile();
+            if(f.isDirectory()){
+                lblEredmeny.setText("<html>Elérés: " + f.getPath() + "<br>Könyvtár: " + f.getName() +"</html>");
+                String[] kit = ((FileNameExtensionFilter)fc.getFileFilter()).getExtensions(); 
+                try {
+                    Files.write(Paths.get(f.getPath() + kit[0], "stat.txt"), "Statisztika:".getBytes());
+                } catch (IOException ex) {
+                    Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_mnuFajlMentMaskentActionPerformed
 
     /**
      * @param args the command line arguments
