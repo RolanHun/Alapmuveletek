@@ -283,7 +283,7 @@ public class Muveletek extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+String mentettFajl;
     private void mnuFajlMentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFajlMentActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.setDialogTitle("Fájl mentése:");
@@ -299,6 +299,16 @@ public class Muveletek extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+        if (mentettFajl == null) {
+            mnuFajlMentMaskentActionPerformed(evt);
+        }
+        else {
+            try {
+                Files.write(Paths.get(mentettFajl), "Statisztika: mentve".getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_mnuFajlMentActionPerformed
@@ -336,7 +346,7 @@ public class Muveletek extends javax.swing.JFrame {
                 lblEredmeny.setText("<html>Elérés: " + fn + "<br>Fájl neve: " + f.getName()+ "." + kit [0] +"</html>");
                 try {
                     if (mentes) {
-                    Files.write(path, "Statisztika:".getBytes());
+                    Files.write(path, "Statisztika: új".getBytes());
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
