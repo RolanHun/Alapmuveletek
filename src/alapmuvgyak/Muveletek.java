@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -40,7 +42,7 @@ public class Muveletek extends javax.swing.JFrame {
         btnMegoldas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblOsszKerdes = new javax.swing.JLabel();
-        lbllblOsszProba = new javax.swing.JLabel();
+        lblOsszesProba = new javax.swing.JLabel();
         lblEredmeny = new javax.swing.JLabel();
         lblOsszeadKerdes = new javax.swing.JLabel();
         lblKivonasKerdes = new javax.swing.JLabel();
@@ -113,8 +115,8 @@ public class Muveletek extends javax.swing.JFrame {
         lblOsszKerdes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblOsszKerdes.setText("Össz kérdések száma: 1");
 
-        lbllblOsszProba.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbllblOsszProba.setText("Össz Probálkozások száma: 1");
+        lblOsszesProba.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblOsszesProba.setText("Össz Probálkozások száma: 1");
 
         lblEredmeny.setText("Eredmény: 0 %");
 
@@ -164,7 +166,7 @@ public class Muveletek extends javax.swing.JFrame {
                             .addComponent(lblSzorzasProba, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOsszeadProba, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOsztasProba, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbllblOsszProba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblOsszesProba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -176,7 +178,7 @@ public class Muveletek extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOsszKerdes)
-                    .addComponent(lbllblOsszProba))
+                    .addComponent(lblOsszesProba))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -432,12 +434,12 @@ String mentettFajl;
     private javax.swing.JLabel lblOsszKerdes;
     private javax.swing.JLabel lblOsszeadKerdes;
     private javax.swing.JLabel lblOsszeadProba;
+    private javax.swing.JLabel lblOsszesProba;
     private javax.swing.JLabel lblOsztasKerdes;
     private javax.swing.JLabel lblOsztasProba;
     private javax.swing.JLabel lblSzorzasKerdes;
     private javax.swing.JLabel lblSzorzasProba;
     private javax.swing.JLabel lblValasz;
-    private javax.swing.JLabel lbllblOsszProba;
     private javax.swing.JMenu mnuFajl;
     private javax.swing.JMenuItem mnuFajlKilep;
     private javax.swing.JMenuItem mnuFajlMegnyit;
@@ -447,4 +449,22 @@ String mentettFajl;
     private javax.swing.JPanel pnlGyakorlas;
     private javax.swing.JTextField txtEredmeny;
     // End of variables declaration//GEN-END:variables
-}
+private String tartalomOsszeallitas() {
+    String statisztika = "Az alapműveletek gyakoroltatása statisztika: \n";
+    
+    JLabel[] lblTomb = new JLabel[](lblOsszKerdes, lblOsszesProba, lblOsszeadKerdes, lblOsszeadProba, lblKivonasKerdes,lblKivonasProba,lblSzorzasKerdes,lblSzorzasProba,lblOsztasKerdes,lblOsztasProba);
+        
+       final int HE = 3;
+       final int kh = lblTomb[0].getText().length();
+       final int ph = lblTomb[1].getText().length();
+    
+   for (int i = 0; i < lblTomb.length-1; i+=2){
+       JLabel lblKerdes = lblTomb[i];
+       JLabel lblProba = lblTomb[i+1];
+       String format = "%" + (kh+HE) +  "%" + (ph+HE) + "%\n";
+       statisztika += String.format(format,lblKerdes.getText(), lblProba.getText());
+   }
+    return statisztika;   
+    }
+        
+    }
