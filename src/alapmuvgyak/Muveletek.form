@@ -117,7 +117,7 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="pnlGyakorlas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnUj" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="btnMegoldas" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -161,17 +161,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lblValasz" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblFeladat" min="-2" pref="76" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtEredmeny" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="txtEredmeny" min="-2" pref="81" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnEllenorzes" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lblValasz" min="-2" pref="175" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnEllenorzes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -201,11 +204,18 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEredmeny">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnEllenorzes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ellen&#x151;rz&#xe9;s"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEllenorzesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValasz">
           <Properties>
@@ -218,11 +228,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xda;j feladat"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUjActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnMegoldas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Megold&#xe1;s"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMegoldasActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
@@ -304,13 +321,13 @@
         <Component class="javax.swing.JLabel" name="lblOsszKerdes">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xd6;ssz k&#xe9;rd&#xe9;sek sz&#xe1;ma: 1"/>
+            <Property name="text" type="java.lang.String" value="&#xd6;ssz k&#xe9;rd&#xe9;sek sz&#xe1;ma: 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblOsszesProba">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xd6;ssz Prob&#xe1;lkoz&#xe1;sok sz&#xe1;ma: 1"/>
+            <Property name="text" type="java.lang.String" value="&#xd6;ssz Prob&#xe1;lkoz&#xe1;sok sz&#xe1;ma: 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEredmeny">
@@ -321,7 +338,7 @@
         <Component class="javax.swing.JLabel" name="lblOsszeadKerdes">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xd6;sszead&#xe1;s: 1"/>
+            <Property name="text" type="java.lang.String" value="&#xd6;sszead&#xe1;s: 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblKivonasKerdes">
@@ -345,7 +362,7 @@
         <Component class="javax.swing.JLabel" name="lblOsszeadProba">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xd6;sszead&#xe1;s: 1"/>
+            <Property name="text" type="java.lang.String" value="&#xd6;sszead&#xe1;s: 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblKivonasProba">
