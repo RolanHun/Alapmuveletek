@@ -267,13 +267,13 @@
                               <Component id="lblSzorzasKerdes" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblOsszKerdes" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblKivonasProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSzorzasProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblOsszeadProba" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblOsztasProba" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblOsszesProba" alignment="1" min="-2" pref="163" max="-2" attributes="0"/>
+                              <Component id="lblOsszesProba" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -327,7 +327,7 @@
         <Component class="javax.swing.JLabel" name="lblOsszesProba">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xd6;ssz Prob&#xe1;lkoz&#xe1;sok sz&#xe1;ma: 0"/>
+            <Property name="text" type="java.lang.String" value="&#xd6;ssz prob&#xe1;lkoz&#xe1;sok sz&#xe1;ma: 0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEredmeny">

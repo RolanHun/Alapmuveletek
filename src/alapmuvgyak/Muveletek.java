@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -138,7 +139,7 @@ public class Muveletek extends javax.swing.JFrame {
         lblOsszKerdes.setText("Össz kérdések száma: 0");
 
         lblOsszesProba.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblOsszesProba.setText("Össz Probálkozások száma: 0");
+        lblOsszesProba.setText("Össz probálkozások száma: 0");
 
         lblEredmeny.setText("Eredmény: 0 %");
 
@@ -182,13 +183,13 @@ public class Muveletek extends javax.swing.JFrame {
                             .addComponent(lblOsztasKerdes)
                             .addComponent(lblSzorzasKerdes)
                             .addComponent(lblOsszKerdes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblKivonasProba, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSzorzasProba, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOsszeadProba, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOsztasProba, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblOsszesProba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblOsszesProba, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -391,8 +392,17 @@ String mentettFajl;
         fc.setAcceptAllFileFilterUsed(true);
         int valasztottGomb = fc.showOpenDialog(this);
         File f = fc.getSelectedFile();
+        String fn = f.getPath();
         if (valasztottGomb == JFileChooser.APPROVE_OPTION) {
             lblEredmeny.setText("<html>Elérés: " + f.getPath() + "<br>Könyvtár: " + f.getName() +"</html>");
+            Path path = Paths.get(fn);
+            try {
+                List<String> stringLista = Files.readAllLines(path);
+                String egySor = stringLista.get(i);
+                String[] adatok = egySor.split(":");
+            } catch (IOException ex) {
+                Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else {
             JOptionPane.showMessageDialog(this, "Megnyitás megszakítva!", "Nincs megnyitva!", JOptionPane.WARNING_MESSAGE);
@@ -403,20 +413,51 @@ String mentettFajl;
     int probaOsszes = 0;
     int kerdesOsztas = 0;
     int probaOsztas = 0;
+    int kerdesSzorzas = 0;
+    int probaSzorzas = 0;
+    int kerdesOsszead = 0;
+    int probaOsszead = 0;
+    int kerdesKivon = 0;
+    int probaKivon = 0;
     int megoldas = 0;
+    
       
     private void btnUjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUjActionPerformed
         kerdesOsszes += 1;
+        lblOsszKerdes.setText("Össz kérdések száma: "+kerdesOsszes);
         Random rand = new Random();
         int elso = rand.nextInt(100);
         int masodik = rand.nextInt(100);
+        while (elso<masodik){
+            elso = rand.nextInt(100);
+            masodik = rand.nextInt(100);
+        }
         txtEredmeny.setEnabled(true);
         btnEllenorzes.setEnabled(true);
         btnMegoldas.setEnabled(true);
         if (btnOszt.isSelected()){
-            megoldas= (elso%masodik);
+            megoldas= (elso/masodik);
             kerdesOsztas += 1;
             lblValasz.setText(elso+" : "+masodik+" | Osztás");
+            lblOsztasKerdes.setText("Osztás: "+kerdesOsztas);
+        }
+        if (btnSzoroz.isSelected()){
+            megoldas= (elso*masodik);
+            kerdesSzorzas += 1;
+            lblValasz.setText(elso+" * "+masodik+" | Szorzás");
+            lblSzorzasKerdes.setText("Szorzás: "+kerdesSzorzas);
+        }
+        if (btnOsszead.isSelected()){
+            megoldas= (elso+masodik);
+            kerdesOsszead += 1;
+            lblValasz.setText(elso+" + "+masodik+" | Összeadás");
+            lblOsszeadKerdes.setText("Összeadás: "+kerdesOsszead);
+        }
+        if (btnKivon.isSelected()){
+            megoldas= (elso-masodik);
+            kerdesKivon += 1;
+            lblValasz.setText(elso+" - "+masodik+" | Kivonás");
+            lblKivonasKerdes.setText("Kivonás: "+kerdesKivon);
         }
     }//GEN-LAST:event_btnUjActionPerformed
 
@@ -429,17 +470,45 @@ String mentettFajl;
             btnEllenorzes.setEnabled(false);
             btnMegoldas.setEnabled(false);
             probaOsszes += 1;
+            lblOsszesProba.setText("Össz próbálkozások száma: "+probaOsszes);
             if (btnOszt.isSelected()){
-            kerdesOsztas += 1;
-        }
+            probaOsztas += 1;
+            lblOsztasProba.setText("Osztás: "+probaOsztas);
+            }
+            if (btnSzoroz.isSelected()){
+            probaSzorzas += 1;
+            lblSzorzasProba.setText("Szorzás: " + probaSzorzas);
+            }
+            if (btnOsszead.isSelected()){
+            probaOsszead += 1;
+            lblOsszeadProba.setText("Összeadás: " + probaOsszead);
+            }
+            if (btnKivon.isSelected()){
+            probaKivon += 1;
+            lblKivonasProba.setText("Kivonás: " + probaKivon);
+            }
         }
         else {
             lblValasz.setText(eredmenyint + " - Rossz válasz!");
             txtEredmeny.setText("");
             probaOsszes += 1;
+            lblOsszesProba.setText("Össz próbálkozások száma: " + probaOsszes);
             if (btnOszt.isSelected()){
-            kerdesOsztas += 1;
-        }
+            probaOsztas += 1;
+            lblOsztasProba.setText("Osztás: " + probaOsztas);
+            }
+            if (btnSzoroz.isSelected()){
+            probaSzorzas += 1;
+            lblSzorzasProba.setText("Szorzás: " + probaSzorzas);
+            }
+            if (btnOsszead.isSelected()){
+            probaOsszead += 1;
+            lblOsszeadProba.setText("Összeadás: " + probaOsszead);
+            }
+            if (btnKivon.isSelected()){
+            probaKivon += 1;
+            lblKivonasProba.setText("Kivonás: " + probaKivon);
+            }
             
         }
     }//GEN-LAST:event_btnEllenorzesActionPerformed
