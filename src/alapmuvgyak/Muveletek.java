@@ -397,9 +397,59 @@ String mentettFajl;
             lblEredmeny.setText("<html>Elérés: " + f.getPath() + "<br>Könyvtár: " + f.getName() +"</html>");
             Path path = Paths.get(fn);
             try {
+                //byte[] bajtTomb = Files.readAllBytes(path);
+                //byte egyBajt = bajtTomb[1];
+                
                 List<String> stringLista = Files.readAllLines(path);
-                String egySor = stringLista.get(i);
-                String[] adatok = egySor.split(":");
+                
+                int lblIndex=0;
+                for (int i = 1; i < stringLista.size(); i++){
+                    String egySor = stringLista.get(i);
+                    String[] adatok = egySor.split(": ");
+                    
+                };
+                
+                String egySor = stringLista.get(1);
+                String[] adatok = egySor.split(": ");
+                String proSz=adatok [2];
+                lblOsszesProba.setText("Össz próbálkozások száma: "+ proSz);
+                adatok = adatok[1].split(" ");
+                String kerSz= adatok[0];
+                lblOsszKerdes.setText("Össz kérdések száma: "+ kerSz);
+                
+                egySor = stringLista.get(2);
+                adatok = egySor.split(": ");
+                proSz=adatok [2];
+                lblOsszeadProba.setText("Összeadás: "+ proSz);
+                adatok = adatok[1].split(" ");
+                kerSz= adatok[0];
+                lblOsszeadKerdes.setText("Összeadás: "+ kerSz);
+                
+                egySor = stringLista.get(3);
+                adatok = egySor.split(": ");
+                proSz=adatok [2];
+                lblKivonasProba.setText("Kivonás: "+ proSz);
+                adatok = adatok[1].split(" ");
+                kerSz= adatok[0];
+                lblKivonasKerdes.setText("Kivonás: "+ kerSz);
+                
+                egySor = stringLista.get(4);
+                adatok = egySor.split(": ");
+                proSz=adatok [2];
+                lblOsztasProba.setText("Osztás: "+ proSz);
+                adatok = adatok[1].split(" ");
+                kerSz= adatok[0];
+                lblOsztasKerdes.setText("Osztás: "+ kerSz);
+                
+                egySor = stringLista.get(5);
+                adatok = egySor.split(": ");
+                proSz=adatok [2];
+                lblSzorzasProba.setText("Osztás: "+ proSz);
+                adatok = adatok[1].split(" ");
+                kerSz= adatok[0];
+                lblSzorzasKerdes.setText("Osztás: "+ kerSz);
+                
+                int i = 7;
             } catch (IOException ex) {
                 Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
             }
